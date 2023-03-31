@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nginx-ingress-route
+  namespace: nginx-test
+spec:
+  routes:
+    - kind: Rule
+      # match: Host(`*`) && PathPrefix(`/blog/`)
+      match: PathPrefix(`/nginx/`)
+      middlewares:
+        - name: strip-prefix-1
+      services:
+        - name: nginx
+          port: 80
